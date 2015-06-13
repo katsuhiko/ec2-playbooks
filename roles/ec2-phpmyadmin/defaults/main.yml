@@ -1,0 +1,10 @@
+---
+httpd_server_name: example.com:80
+httpd_document_root_options: FollowSymLinks
+httpd_redirect_http_to_https: true
+httpd_welcome_site_enabled: false
+
+phpmyadmin_require_any: all granted
+phpmyadmin_blowfish_secret: 2629749882225017353
+phpmyadmin_servers:
+  - host: localhost

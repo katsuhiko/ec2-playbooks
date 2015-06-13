@@ -1,0 +1,38 @@
+---
+- name: install httpd
+  yum: name={{item}} state=latest
+  with_items:
+    - httpd24
+    - mod24_ssl
+
+- name: set autoload httpd
+  command: chkconfig httpd on
+
+- name: put httpd.conf
+  template: src=roles/ec2-phpmyadmin/templates/httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf backup=true mode=0644
+  notify: restart httpd
+
+- name: rename welcome.conf to welcone.conf.backup
+  command: mv -f /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf.backup removes=/etc/httpd/conf.d/welcome.conf
+  notify: restart httpd
+  when: not httpd_welcome_site_enabled
+
+- name: install php
+  yum: name={{item}} state=latest
+  with_items:
+    - php55
+
+- name: put php.ini
+  template: src=roles/ec2-phpmyadmin/templates/php-5.5.ini.j2 dest=/etc/php-5.5.ini backup=true mode=0644
+  notify: restart httpd
+
+- name: install phpmyadmin
+  yum: name=phpmyadmin state=latest enablerepo=epel
+
+- name: put phpMyAmin.conf
+  template: src=roles/ec2-phpmyadmin/templates/phpMyAdmin.conf.j2 dest=/etc/httpd/conf.d/phpMyAdmin.conf backup=true mode=0644
+  notify: restart httpd
+
+- name: put config.inc.php
+  template: src=roles/ec2-phpmyadmin/templates/phpMyAdmin.config.inc.php.j2 dest=/etc/phpMyAdmin/config.inc.php backup=true mode=0640
+  notify: restart httpd
