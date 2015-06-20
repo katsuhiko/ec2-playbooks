@@ -14,3 +14,4 @@
 
 - name: Set kibana service to start on boot
   service: name=kibana enabled=true
+
