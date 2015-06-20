@@ -1,4 +1,7 @@
 ---
+- name: Upgrade all packages
+  yum: name=* state=latest
+
 - name: Install httpd
   yum: name={{ item }} state=latest
   with_items:
