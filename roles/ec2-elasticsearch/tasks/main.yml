@@ -1,0 +1,7 @@
+---
+- name: Install elasticsearch
+  yum: name="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.6.0.noarch.rpm" state="present"
+  notify: restart elasticsearch
+
+- name: Set elasticsearch service to start on boot
+  service: name=elasticsearch enabled=true

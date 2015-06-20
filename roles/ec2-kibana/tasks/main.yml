@@ -1,0 +1,16 @@
+---
+- name: Download kibana
+  get_url: url="https://download.elastic.co/kibana/kibana/kibana-4.1.0-linux-x64.tar.gz" dest="/tmp/kibana-4.1.0-linux-x64.tar.gz" mode=0644
+
+- name: Unarchive kibana
+  unarchive: src=/tmp/kibana-4.1.0-linux-x64.tar.gz dest=/opt/ copy=no
+
+- name: Install kibana
+  file: src=/opt/kibana-4.1.0-linux-x64 dest=/opt/kibana state=link
+
+- name: Put init script for kibana
+  template: src=kibana.j2 dest=/etc/init.d/kibana mode=0755
+  notify: restart kibana
+
+- name: Set kibana service to start on boot
+  service: name=kibana enabled=true

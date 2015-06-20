@@ -1,0 +1,32 @@
+---
+- name: Download fluentd
+  get_url: url="https://td-toolbelt.herokuapp.com/sh/install-redhat-td-agent2.sh" dest="/tmp/install-redhat-td-agent2.sh" mode=0755
+
+- name: Install fluentd
+  shell: /tmp/install-redhat-td-agent2.sh
+
+- name: Set fluentd service to start on boot
+  service: name=td-agent enabled=true
+
+- name: Install fluentd-plugins
+  gem: name={{ item }} state=latest executable="/opt/td-agent/embedded/bin/fluent-gem" user_install=false
+  with_items:
+    - fluent-plugin-elasticsearch
+    - fluent-plugin-elb-access-log
+  notify: restart fluentd
+
+- name: Put td-agent.conf
+  template: src=td-agent.conf.j2 dest=/etc/td-agent/td-agent.conf backup=true mode=0644
+  notify: restart fluentd
+
+- name: Check replaced the certificate
+  stat: path=/opt/td-agent/embedded/ssl/certs/cacert.pem.original
+  register: cert_pem_original
+
+- name: Backup the certificate
+  command: cp /opt/td-agent/embedded/ssl/certs/cacert.pem /opt/td-agent/embedded/ssl/certs/cacert.pem.original
+  when: not cert_pem_original.stat.exists
+
+- name: Replace the certificate
+  command: cp /etc/pki/tls/cert.pem /opt/td-agent/embedded/ssl/certs/cacert.pem
+  when: not cert_pem_original.stat.exists

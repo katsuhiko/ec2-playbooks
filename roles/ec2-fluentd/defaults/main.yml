@@ -1,0 +1,8 @@
+---
+fluentd_sources:
+  - aws_key_id: XXXXXXXXXXXX
+    aws_sec_key: XXXXXXXXXXXX
+    region: ap-northeast-1
+    account_id: 999999999999
+    s3_bucket: bucket_name
+    s3_prefix: prefix
