@@ -1,0 +1,19 @@
+- hosts: all
+  sudo: yes
+  vars:
+    fluentd_sources:
+      - aws_key_id: XXXXXXXXXXXX
+        aws_sec_key: XXXXXXXXXXXXXXXXXXXXXXXX
+        region: ap-northeast-1
+        account_id: 999999999999
+        s3_bucket: bucketname
+        s3_prefix: prefix
+        start_datetime: 2015/06/01 00:00
+    kibana_basic_enabled: true
+    kibana_basic_user_name: kibana
+    kibana_basic_user_password: kibanapassword
+  roles:
+    - ec2-elasticsearch
+    - ec2-fluentd
+    - ec2-nginx
+    - ec2-kibana
