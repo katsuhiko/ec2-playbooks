@@ -17,9 +17,11 @@ $ ansible-playbook -i "xxx.xxx.xxx.xxx," --user=ec2-user --private-key=xxx.pem p
 ### ec2-phpmyadmin playbook
 
 RDS(MySQL) を操作するための phpMyAdmin を立ち上げる playbook です。
+
 [ec2-phpmyadmin.example.yml](ec2-phpmyadmin.example.yml) を参照してください。
 
 ### ec2-kibana playbook
 
 ELB のアクセスログ解析を行うための fluentd + elasticsearch + kibana を立ち上げる playbook です。
+
 [ec2-kibana.example.yml](ec2-kibana.example.yml) を参照してください。
