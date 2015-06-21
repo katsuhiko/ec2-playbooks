@@ -3,7 +3,6 @@
 # redirect https from http
 server {
   listen 80;
-  server_name hogeracho.com;
 
   location ~ ^/kibana/.* {
     return 301 https://$host$request_uri;
@@ -12,10 +11,10 @@ server {
 
 # proxy kibana
 server {
-  listen                *:443;
+  listen 443;
 
-  access_log            /var/log/nginx/kibana.access.log;
-  error_log             /var/log/nginx/kibana.error.log;
+  access_log /var/log/nginx/kibana.access.log;
+  error_log /var/log/nginx/kibana.error.log;
 
   ssl on;
   ssl_certificate /etc/nginx/certs/local-ssl.crt;
