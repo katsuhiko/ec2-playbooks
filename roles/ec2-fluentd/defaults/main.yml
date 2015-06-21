@@ -6,3 +6,4 @@ fluentd_sources:
     account_id: 999999999999
     s3_bucket: bucket_name
     s3_prefix: prefix
+    start_datetime: 2015/06/01 00:00

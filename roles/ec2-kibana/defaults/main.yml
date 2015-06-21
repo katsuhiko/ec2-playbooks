@@ -1,0 +1,4 @@
+---
+kibana_basic_enabled: true
+kibana_basic_user_name: kibana
+kibana_basic_user_password: kibanapassword

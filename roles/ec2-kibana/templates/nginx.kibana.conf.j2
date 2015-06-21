@@ -1,0 +1,35 @@
+# {{ ansible_managed }}
+
+# redirect https from http
+server {
+  listen 80;
+  server_name hogeracho.com;
+
+  location ~ ^/kibana/.* {
+    return 301 https://$host$request_uri;
+  }
+}
+
+# proxy kibana
+server {
+  listen                *:443;
+
+  access_log            /var/log/nginx/kibana.access.log;
+  error_log             /var/log/nginx/kibana.error.log;
+
+  ssl on;
+  ssl_certificate /etc/nginx/certs/local-ssl.crt;
+  ssl_certificate_key /etc/nginx/certs/local-ssl.key;
+
+  location ~ ^/kibana/.* {
+    proxy_pass http://localhost:5601;
+    rewrite ^/kibana/(.*) /$1 break;
+    proxy_set_header Host $host;
+    proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+
+{% if kibana_basic_enabled %}
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+{% endif %}
+  }
+}
