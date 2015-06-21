@@ -1,0 +1,18 @@
+---
+- name: Install httpd
+  yum: name={{ item }} state=latest
+  with_items:
+    - httpd24
+    - mod24_ssl
+
+- name: Set httpd service to start on boot
+  service: name=httpd enabled=true
+
+- name: Put httpd.conf
+  template: src=httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf backup=true mode=0644
+  notify: restart httpd
+
+- name: Disable welcome site
+  command: mv -f /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf.backup removes=/etc/httpd/conf.d/welcome.conf
+  notify: restart httpd
+  when: not httpd_welcome_site_enabled

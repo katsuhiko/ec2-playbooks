@@ -1,0 +1,9 @@
+---
+- name: Install php
+  yum: name={{ item }} state=latest
+  with_items:
+    - php55
+
+- name: Put php.ini
+  template: src=php-5.5.ini.j2 dest=/etc/php-5.5.ini backup=true mode=0644
+  notify: restart httpd
