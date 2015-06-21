@@ -15,3 +15,14 @@
 - name: Set kibana service to start on boot
   service: name=kibana enabled=true
 
+- name: Install passlib for creating htpasswd
+  pip: name=passlib state=latest
+  when: kibana_basic_enabled
+
+- name: Create htpasswd
+  htpasswd: path=/etc/nginx/conf.d/kibana.htpasswd name={{ kibana_basic_user_name }} password={{ kibana_basic_user_password }} create=yes state=present
+  when: kibana_basic_enabled
+
+- name: Put nginx.kibana.conf
+  template: src=nginx.kibana.conf.j2 dest=/etc/nginx/conf.d/kibana.conf mode=0644
+  notify: restart nginx

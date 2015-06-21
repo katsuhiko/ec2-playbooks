@@ -73,7 +73,7 @@
   #tsfile_path /var/tmp/fluent-plugin-elb-access-log.ts
   #histfile_path /var/tmp/fluent-plugin-elb-access-log.history
   #interval 300
-  #start_datetime 2015/05/24 17:00
+  start_datetime {{ source.start_datetime }}
   #buffer_sec 600
   #history_length 100
   #sampling_interval 1
