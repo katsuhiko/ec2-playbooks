@@ -5,4 +5,7 @@
       - host: rds1.xxx.ap-northeast-1.rds.amazonaws.com
       - host: rds2.xxx.ap-northeast-1.rds.amazonaws.com
   roles:
+    - ec2-yum-update
+    - ec2-httpd
+    - ec2-php
     - ec2-phpmyadmin

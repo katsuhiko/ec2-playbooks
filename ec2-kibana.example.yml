@@ -13,6 +13,7 @@
     kibana_basic_user_name: kibana
     kibana_basic_user_password: kibanapassword
   roles:
+    - ec2-yum-update
     - ec2-elasticsearch
     - ec2-fluentd
     - ec2-nginx
