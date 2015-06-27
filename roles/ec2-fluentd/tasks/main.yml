@@ -8,13 +8,6 @@
 - name: Set fluentd service to start on boot
   service: name=td-agent enabled=true
 
-- name: Install the aws-sdk (In version specified because there is a bug)
-  gem: name={{ item }} version=2.0.48 executable="/opt/td-agent/embedded/bin/fluent-gem" user_install=false
-  with_items:
-    - aws-sdk
-    - aws-sdk-core
-    - aws-sdk-resources
-
 - name: Install fluentd-plugins
   gem: name={{ item }} state=latest executable="/opt/td-agent/embedded/bin/fluent-gem" user_install=false
   with_items:
