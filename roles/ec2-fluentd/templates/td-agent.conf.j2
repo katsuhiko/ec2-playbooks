@@ -63,17 +63,17 @@
 {% for source in fluentd_sources %}
 <source>
   type elb_access_log
-  aws_key_id {{ source.aws_key_id }}
-  aws_sec_key {{ source.aws_sec_key }}
+  {% if source.aws_key_id is undefined %}#{% endif %}aws_key_id {{ source.aws_key_id }}
+  {% if source.aws_sec_key is undefined %}#{% endif %}aws_sec_key {{ source.aws_sec_key }}
   account_id {{ source.account_id }}
   region {{ source.region }}
   s3_bucket {{ source.s3_bucket }}
-  s3_prefix {{ source.s3_prefix }}
+  {% if source.s3_prefix is undefined %}#{% endif %}s3_prefix {{ source.s3_prefix | d('PREFIX') }}
   tag elb.access_log
   #tsfile_path /var/tmp/fluent-plugin-elb-access-log.ts
   #histfile_path /var/tmp/fluent-plugin-elb-access-log.history
   #interval 300
-  start_datetime {{ source.start_datetime }}
+  {% if source.start_datetime is undefined %}#{% endif %}start_datetime {{ source.start_datetime }}
   #buffer_sec 600
   #history_length 100
   #sampling_interval 1
