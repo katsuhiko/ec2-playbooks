@@ -35,11 +35,6 @@
     - gdbm-devel
     - ncurses-devel
 
-- name: Install mysql-devel
-  yum: name={{ item }} state=latest
-  with_items:
-    - mysql-devel
-
 - name: Install ruby-build as rbenv plugin
   sudo: yes
   sudo_user: "{{ rbenv_user }}"
@@ -64,9 +59,3 @@
 - name: Set default ruby version
   command: "sudo -iu {{ rbenv_user }} rbenv global {{ rbenv_ruby_version }}"
   when: rbenv_check_default|failed
-
-- name: Install bundler
-  sudo_user: "{{ rbenv_user }}"
-  gem: name={{ item }} executable=.rbenv/shims/gem user_install=False
-  with_items:
-    - bundler

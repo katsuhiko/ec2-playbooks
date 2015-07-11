@@ -1,6 +1,6 @@
 ---
 - name: Download setup shell for nodejs
-  get_url: url="https://deb.nodesource.com/setup_0.12" dest="/tmp/setup_node.sh" mode=0755
+  get_url: url="https://rpm.nodesource.com/setup" dest="/tmp/setup_node.sh" mode=0755
 
 - name: Setup nodejs
   shell: /tmp/setup_node.sh

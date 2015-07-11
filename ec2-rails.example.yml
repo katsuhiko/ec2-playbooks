@@ -7,3 +7,5 @@
     - ec2-yum-update
     - ec2-rbenv
     - ec2-nodejs
+    - ec2-railsenv
+    - ec2-nginx

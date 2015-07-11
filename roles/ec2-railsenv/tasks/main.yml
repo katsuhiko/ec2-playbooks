@@ -1,0 +1,11 @@
+---
+- name: Install mysql-devel
+  yum: name={{ item }} state=latest
+  with_items:
+    - mysql-devel
+
+- name: Install bundler
+  sudo_user: "{{ rbenv_user }}"
+  gem: name={{ item }} executable=.rbenv/shims/gem user_install=False
+  with_items:
+    - bundler
