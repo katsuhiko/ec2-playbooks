@@ -25,3 +25,12 @@
     cat "$crt_file" "$key_file" >> "$crt_and_key_file" &&
     chmod 400 "$key_file" "$crt_and_key_file"
     creates="/etc/nginx/certs/local-ssl.crt"
+
+- name: Put share index.html
+  template: src=index.html.j2 dest=/usr/share/nginx/html/index.html mode=644
+
+- name: Put share 404.html
+  template: src=404.html.j2 dest=/usr/share/nginx/html/404.html mode=644
+
+- name: Put share 50x.html
+  template: src=50x.html.j2 dest=/usr/share/nginx/html/50x.html mode=644

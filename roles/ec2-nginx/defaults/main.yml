@@ -1,2 +1,3 @@
 ---
-nginx_woker_processes: 2
+nginx_woker_processes: "auto"
+nginx_server_tokens: "off"

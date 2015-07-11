@@ -1,0 +1,11 @@
+- hosts: all
+  sudo: yes
+  vars:
+    rbenv_user: ec2-user
+    rbenv_ruby_version: 2.2.2
+  roles:
+    - ec2-yum-update
+    - ec2-rbenv
+    - ec2-nodejs
+    - ec2-railsenv
+    - ec2-nginx
