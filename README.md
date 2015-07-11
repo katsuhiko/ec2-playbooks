@@ -14,6 +14,13 @@ $ ansible-playbook -i "xxx.xxx.xxx.xxx," --user=ec2-user --private-key=xxx.pem p
 
 ## Playbooks
 
+### ec2-rails playbook
+
+Railsサーバー を立ち上げる playbook です。
+RDS(MySQL) を利用することを想定しています。
+
+[ec2-rails.example.yml](ec2-rails.example.yml) を参照してください。
+
 ### ec2-phpmyadmin playbook
 
 RDS(MySQL) を操作するための phpMyAdmin を立ち上げる playbook です。
