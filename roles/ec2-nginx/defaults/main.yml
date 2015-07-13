@@ -1,3 +1,4 @@
 ---
 nginx_woker_processes: "auto"
 nginx_server_tokens: "off"
+nginx_includes: []
