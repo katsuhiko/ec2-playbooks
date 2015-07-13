@@ -4,6 +4,11 @@
   with_items:
     - mysql-devel
 
+- name: Install dependencies for nokogiri
+  yum: name={{ item }} state=latest
+  with_items:
+    - patch
+
 - name: Install bundler
   sudo_user: "{{ rbenv_user }}"
   gem: name={{ item }} executable=.rbenv/shims/gem user_install=False

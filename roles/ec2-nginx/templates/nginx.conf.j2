@@ -45,6 +45,9 @@ http {
     # See http://nginx.org/en/docs/ngx_core_module.html#include
     # for more information.
     include /etc/nginx/conf.d/*.conf;
+{% for include in nginx_includes %}
+    include {{ include }}
+{% endfor %}
 
     index   index.html index.htm;
 
