@@ -3,6 +3,7 @@
   vars:
     rbenv_user: ec2-user
     rbenv_ruby_version: 2.2.2
+    nginx_includes: ["/var/apps/*/shared/config/nginx.conf"]
   roles:
     - ec2-yum-update
     - ec2-rbenv

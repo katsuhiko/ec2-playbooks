@@ -14,3 +14,6 @@
   gem: name={{ item }} executable=.rbenv/shims/gem user_install=False
   with_items:
     - bundler
+
+- name: Create deploy directory
+  file: path={{ railsenv_deploy_dir }} state=directory owner={{ railsenv_deploy_user }} group={{ railsenv_deploy_group }} mode=0755

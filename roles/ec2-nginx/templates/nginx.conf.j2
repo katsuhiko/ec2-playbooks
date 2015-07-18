@@ -46,7 +46,7 @@ http {
     # for more information.
     include /etc/nginx/conf.d/*.conf;
 {% for include in nginx_includes %}
-    include {{ include }}
+    include {{ include }};
 {% endfor %}
 
     index   index.html index.htm;

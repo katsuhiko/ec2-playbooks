@@ -1,0 +1,4 @@
+---
+railsenv_deploy_dir: "/var/apps"
+railsenv_deploy_user: ec2-user
+railsenv_deploy_group: ec2-user
