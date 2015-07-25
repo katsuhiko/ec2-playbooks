@@ -11,11 +11,23 @@ EC2 Amazon Linux 環境に特化した playbook です。
 EC2 インスタンスを立ち上げて、playbook を適用したい場合、以下の方法で playbook を適用することができます。
 
 ```
-$ ansible-playbook -i "xxx.xxx.xxx.xxx," --private-key=xxx.pem playbook.yml
+$ ansible-playbook -i "xxx.xxx.xxx.xxx," --private-key=~/.ssh/xxx.pem playbook.yml
 ```
 
 ### private-key を毎回指定したくない場合
 
+playbook と同じディレクトリに以下の内容の ansible.cfg ファイルを作成してください。
+
+```
+[defaults]
+private_key_file=~/.ssh/xxx.pem
+```
+
+--private-key オプションを指定せずに実施することができます。
+
+```
+$ ansible-playbook -i "xxx.xxx.xxx.xxx," playbook.yml
+```
 
 
 ## Playbooks
