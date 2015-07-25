@@ -6,3 +6,4 @@
 # ignore production playbooks
 /*.yml
 !/*.example.yml
+ansible.cfg

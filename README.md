@@ -4,13 +4,19 @@ EC2 Amazon Linux 環境に特化した playbook です。
 
 1目的、1サーバー、1 playbook で作ります。
 
+## 実行方法
+
 ### inventory ファイルなしでの実行
 
 EC2 インスタンスを立ち上げて、playbook を適用したい場合、以下の方法で playbook を適用することができます。
 
 ```
-$ ansible-playbook -i "xxx.xxx.xxx.xxx," --user=ec2-user --private-key=xxx.pem playbook.yml
+$ ansible-playbook -i "xxx.xxx.xxx.xxx," --private-key=xxx.pem playbook.yml
 ```
+
+### private-key を毎回指定したくない場合
+
+
 
 ## Playbooks
 
