@@ -29,6 +29,16 @@ private_key_file=~/.ssh/xxx.pem
 $ ansible-playbook -i "xxx.xxx.xxx.xxx," playbook.yml
 ```
 
+### Dynamic Inventory を使う場合
+
+EC2 インスタンスに env, role のタグを作成します。
+
+boto をインストールし ~/.aws/credentials を用意後、以下の方法で実行します。
+
+```
+$ ansible-playbook -i production playbook.yml
+```
+
 
 ## Playbooks
 
