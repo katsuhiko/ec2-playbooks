@@ -1,4 +1,5 @@
-- hosts: all
+- hosts: tag_role_phpmyadmin
+  remote_user: ec2-user
   sudo: yes
   vars:
     phpmyadmin_servers:
