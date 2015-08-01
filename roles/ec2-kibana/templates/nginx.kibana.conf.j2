@@ -4,7 +4,7 @@
 server {
   listen 80;
 
-  location ~ /kibana/ {
+  location /kibana/ {
     return 301 https://$host$request_uri;
   }
 }
@@ -20,7 +20,7 @@ server {
   ssl_certificate /etc/nginx/certs/local-ssl.crt;
   ssl_certificate_key /etc/nginx/certs/local-ssl.key;
 
-  location ~ /kibana/ {
+  location /kibana/ {
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-Proto https;
