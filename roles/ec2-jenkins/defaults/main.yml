@@ -1,0 +1,6 @@
+---
+jenkins_args: "--prefix=/jenkins"
+
+jenkins_basic_enabled: true
+jenkins_basic_user_name: jenkins
+jenkins_basic_user_password: jenkinspassword

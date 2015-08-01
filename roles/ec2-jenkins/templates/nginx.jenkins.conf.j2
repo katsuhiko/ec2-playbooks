@@ -1,0 +1,33 @@
+# {{ ansible_managed }}
+
+# redirect https from http
+server {
+  listen 80;
+
+  location ~ ^/jenkins/.* {
+    return 301 https://$host$request_uri;
+  }
+}
+
+# proxy jenkins
+server {
+  listen 443;
+
+  access_log /var/log/nginx/jenkins.access.log;
+  error_log /var/log/nginx/jenkins.error.log;
+
+  ssl on;
+  ssl_certificate /etc/nginx/certs/local-ssl.crt;
+  ssl_certificate_key /etc/nginx/certs/local-ssl.key;
+
+  location ~ ^/jenkins/.* {
+    proxy_pass http://localhost:8080;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+{% if jenkins_basic_enabled %}
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/conf.d/jenkins.htpasswd;
+{% endif %}
+  }
+}
