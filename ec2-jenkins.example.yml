@@ -16,3 +16,4 @@
     - ec2-nginx
     - ec2-appenv
     - ec2-jenkins
+    - ec2-jenkins-plugin

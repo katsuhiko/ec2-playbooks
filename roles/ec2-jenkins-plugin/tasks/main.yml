@@ -1,0 +1,26 @@
+---
+- name: Get Jenkins CLI
+  get_url: url=http://localhost:8080/jenkins/jnlpJars/jenkins-cli.jar
+    dest=/var/lib/jenkins/jenkins-cli.jar
+    mode=0440
+
+- name: Get Jenkins updates
+  get_url: url=http://updates.jenkins-ci.org/update-center.json
+    dest=/var/lib/jenkins/update-center.json
+    thirsty=yes
+    mode=0440
+  register: jenkins_updates
+
+- name: Update-center Jenkins
+  shell: "cat /var/lib/jenkins/update-center.json | sed '1d;$d' | curl -X POST -H 'Accept: application/json' -d @- http://localhost:8080/jenkins/updateCenter/byId/default/postBack"
+  when: jenkins_updates.changed
+
+- name: Install plugins
+  command: java -jar /var/lib/jenkins/jenkins-cli.jar -s http://localhost:8080/jenkins install-plugin {{ item }}
+  with_items:
+    - git
+    - ruby
+    - rake
+    - rbenv
+    - rubyMetrics
+  notify: restart jenkins
