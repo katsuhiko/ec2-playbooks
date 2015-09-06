@@ -3,12 +3,13 @@
   get_url: url=http://localhost:8080/jenkins/jnlpJars/jenkins-cli.jar
     dest=/var/lib/jenkins/jenkins-cli.jar
     mode=0440
+    timeout=60
 
 - name: Get Jenkins updates
   get_url: url=http://updates.jenkins-ci.org/update-center.json
     dest=/var/lib/jenkins/update-center.json
-    thirsty=yes
     mode=0440
+    timeout=60
   register: jenkins_updates
 
 - name: Update-center Jenkins

@@ -1,19 +1,23 @@
-- hosts: tag_role_rails
+- hosts: tag_role_jenkins
   remote_user: ec2-user
   sudo: yes
   vars:
-    rbenv_user: ec2-user
+    rbenv_user: jenkins
     rbenv_ruby_version: 2.2.2
-    nginx_includes: ["/var/apps/*/shared/config/nginx.conf"]
+    railsenv_deploy_dir: "/var/lib/jenkins/apps"
+    railsenv_deploy_user: jenkins
+    railsenv_deploy_group: jenkins
+    nginx_includes: []
     jenkins_basic_enabled: true
     jenkins_basic_user_name: jenkins
     jenkins_basic_user_password: jenkinspassword
   roles:
     - ec2-yum-update
+    - ec2-nginx
+    - ec2-jenkins
+    - ec2-jenkins-plugin
+    - ec2-jenkins-mysql
     - ec2-rbenv
     - ec2-nodejs
     - ec2-railsenv
-    - ec2-nginx
     - ec2-appenv
-    - ec2-jenkins
-    - ec2-jenkins-plugin

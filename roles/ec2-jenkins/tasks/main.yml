@@ -11,9 +11,20 @@
 - name: Set jenkins service to start on boot
   service: name=jenkins enabled=true
 
+- name: Change login shell
+  user: name=jenkins state=present shell=/bin/bash
+
+- name: Put .bash_profile
+  sudo: yes
+  sudo_user: jenkins
+  template: src=bash_profile.j2 dest=/var/lib/jenkins/.bash_profile mode=0644
+
 - name: Put jenkins sysconfig
   template: src=jenkins.j2 dest=/etc/sysconfig/jenkins mode=0600
   notify: restart jenkins
+
+- name: Start jenkins
+  service: name=jenkins state=started
 
 - name: Install passlib for creating htpasswd
   pip: name=passlib state=latest
@@ -26,3 +37,6 @@
 - name: Put nginx.jenkins.conf
   template: src=nginx.jenkins.conf.j2 dest=/etc/nginx/conf.d/jenkins.conf mode=0644
   notify: restart nginx
+
+- name: Start nginx
+  service: name=nginx state=started
